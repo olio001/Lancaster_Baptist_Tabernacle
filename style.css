@@ -89,7 +89,7 @@ ul {
 /* Hero Section */
 .hero {
     height: 100vh;
-    background: url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+    background: url('../img/front_left.jpg') no-repeat center center/cover;
     position: relative;
     display: flex;
     align-items: center;
