@@ -45,8 +45,13 @@ html {
 
 body {
     font-family: var(--font-body);
-    background-color: var(--color-bg-deep);
-    background-image: radial-gradient(circle at 50% 0%, #1a3a5e 0%, var(--color-bg-deep) 70%);
+    /* Window Background with Frosted Overlay */
+    background:
+        linear-gradient(rgba(10, 25, 47, 0.85), rgba(10, 25, 47, 0.95)),
+        /* Heavy Frosted Tint */
+        url('img/Window.jpg') no-repeat center center fixed;
+    /* "Down on the page" */
+    background-size: cover;
     color: var(--color-text-main);
     line-height: 1.7;
     overflow-x: hidden;
@@ -114,111 +119,6 @@ ul {
     }
 }
 
-@keyframes glowPulse {
-    0% {
-        box-shadow: 0 0 5px var(--color-gold-glow);
-    }
-
-    50% {
-        box-shadow: 0 0 20px var(--color-gold-glow), 0 0 10px var(--color-gold);
-    }
-
-    100% {
-        box-shadow: 0 0 5px var(--color-gold-glow);
-    }
-}
-
-@keyframes kenBurns {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.1);
-    }
-}
-
-.animate-up {
-    animation: floatUp 1s var(--ease-smooth) forwards;
-}
-
-/* Navigation */
-.navbar {
-    position: fixed;
-    top: 20px;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 0 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.navbar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    padding: 15px 30px;
-}
-
-.logo {
-    font-family: var(--font-heading);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--color-gold);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 40px;
-}
-
-.nav-links a {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-text-main);
-    position: relative;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-gold);
-    transition: width 0.3s var(--ease-smooth);
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-.nav-links a:hover {
-    color: var(--color-gold);
-    text-shadow: 0 0 10px var(--color-gold-glow);
-}
-
-.hamburger {
-    display: none;
-    cursor: pointer;
-}
-
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background: var(--color-gold);
-    margin: 6px 0;
-    transition: 0.3s;
-}
-
 /* Hero Section */
 .hero {
     height: 100vh;
@@ -236,9 +136,18 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
+    /* Default: Spring, Summer, Fall */
     background: url('img/front_left.jpg') no-repeat center center/cover;
     animation: kenBurns 20s ease-in-out infinite alternate;
     z-index: 0;
+    transition: background-image 1s ease-in-out;
+}
+
+/* Winter Season Background (Wreath) */
+.season-christmas .hero-bg,
+.season-newyear .hero-bg,
+.season-winter .hero-bg {
+    background-image: url('img/Wreath.jpg');
 }
 
 .hero-overlay {
@@ -566,5 +475,305 @@ footer p {
         /* Image first on mobile */
         max-width: 400px;
         margin: 0 auto;
+    }
+}
+
+/* --- Navigation (Fixed & Floating) --- */
+.navbar {
+    position: fixed;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    pointer-events: none;
+    /* Let clicks pass through outside content */
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-content {
+    pointer-events: auto;
+    /* Re-enable clicks on the bar itself */
+    /* More specific glass effect */
+    background: rgba(10, 25, 47, 0.65);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    padding: 10px 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: 140px auto 140px;
+    /* Badge - Logo - Hamburger */
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    transition: all 0.3s var(--ease-smooth);
+}
+
+.logo {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hamburger {
+    justify-self: end;
+    font-size: 1.5rem;
+    color: var(--color-text-main);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    display: block;
+    width: 30px;
+    height: 25px;
+    position: relative;
+}
+
+.hamburger span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: var(--color-gold);
+    border-radius: 9px;
+    left: 0;
+    transform-origin: left center;
+    transition: .25s ease-in-out;
+}
+
+.hamburger span:nth-child(1) {
+    top: 0px;
+}
+
+.hamburger span:nth-child(2) {
+    top: 10px;
+}
+
+.hamburger span:nth-child(3) {
+    top: 20px;
+}
+
+.hamburger:hover {
+    color: var(--color-gold);
+}
+
+/* Nav Links Dropdown (App-like) */
+.nav-links {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 250px;
+    background: rgba(10, 25, 47, 0.98);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 20px;
+    display: none;
+    /* Hidden by default */
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+    z-index: 2001;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links li a {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--color-text-main);
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.nav-links li a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-gold);
+}
+
+/* Weather Badge (Left Pill) */
+#weather-badge {
+    justify-self: start;
+    font-family: var(--font-body);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* --- Atmosphere Overlay --- */
+#atmosphere-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999;
+    /* Below Navbar, Above Content */
+}
+
+/* --- Atmosphere Layer (CSS Holidays) --- */
+#atmosphere-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 998;
+    /* Just below Canvas */
+    overflow: hidden;
+}
+
+/* Atmosphere Tints */
+.weather-rain #atmosphere-canvas {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.weather-snow #atmosphere-canvas {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.is-night #atmosphere-canvas {
+    background: rgba(0, 0, 10, 0.2);
+}
+
+/* CHRISTMAS DAY: Realistic Bulbs & Hearth */
+.season-christmas {
+    --color-gold: #c21807;
+}
+
+.season-christmas #atmosphere-layer {
+    background-image:
+        radial-gradient(circle at 70% 25px, #ffD700 4px, rgba(255, 215, 0, 0.5) 8px, transparent 10px),
+        radial-gradient(circle at 80% 35px, #0000ff 4px, rgba(0, 0, 255, 0.5) 8px, transparent 10px),
+        radial-gradient(circle at 90% 25px, #ff0000 4px, rgba(255, 0, 0, 0.5) 8px, transparent 10px);
+    background-repeat: repeat-x;
+    background-size: 100% 100%;
+    animation: bulbBlink 2s steps(2, start) infinite;
+}
+
+.season-christmas #atmosphere-layer::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-image:
+        radial-gradient(circle at 15% 30px, #00ff00 4px, rgba(0, 255, 0, 0.5) 8px, transparent 10px),
+        radial-gradient(circle at 25% 30px, #ffD700 4px, rgba(255, 215, 0, 0.5) 8px, transparent 10px),
+        radial-gradient(circle at 35% 30px, #ff0000 4px, rgba(255, 0, 0, 0.5) 8px, transparent 10px),
+        radial-gradient(circle at 45% 30px, #00ff00 4px, rgba(0, 255, 0, 0.5) 8px, transparent 10px),
+        radial-gradient(circle at 55% 30px, #ffD700 4px, rgba(255, 215, 0, 0.5) 8px, transparent 10px),
+        radial-gradient(circle at 65% 30px, #ff0000 4px, rgba(255, 0, 0, 0.5) 8px, transparent 10px),
+        radial-gradient(circle at 75% 30px, #00ff00 4px, rgba(0, 255, 0, 0.5) 8px, transparent 10px),
+        radial-gradient(circle at 85% 30px, #ffD700 4px, rgba(255, 215, 0, 0.5) 8px, transparent 10px),
+        radial-gradient(circle at 95% 30px, #ff0000 4px, rgba(255, 0, 0, 0.5) 8px, transparent 10px);
+    animation: bulbBlinkInverse 2s steps(2, start) infinite;
+}
+
+@keyframes bulbBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+        filter: saturate(1.2);
+    }
+
+    50% {
+        opacity: 0.5;
+        filter: saturate(0.8);
+    }
+}
+
+@keyframes bulbBlinkInverse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        filter: saturate(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        filter: saturate(1.2);
+    }
+}
+
+/* EASTER SUNDAY: Ascension */
+.season-easter {
+    --color-gold: #f4c430;
+    --color-bg-deep: #2a1b3d;
+}
+
+.season-easter #atmosphere-layer::before {
+    content: '✝️';
+    position: absolute;
+    bottom: -50px;
+    left: 10%;
+    font-size: 1.5rem;
+    opacity: 0;
+    text-shadow: 0 0 15px gold;
+    animation: riseUp 10s ease-in infinite;
+}
+
+.season-easter #atmosphere-layer::after {
+    content: '✨';
+    position: absolute;
+    bottom: -50px;
+    right: 20%;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: riseUp 14s ease-in infinite 3s;
+}
+
+@keyframes riseUp {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 0.6;
+    }
+
+    90% {
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .navbar-content {
+        width: 95%;
+        padding: 10px 20px;
+        grid-template-columns: auto 1fr auto;
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 1rem;
+        /* Smaller on mobile */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
     }
 }
