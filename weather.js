@@ -236,6 +236,7 @@ const WeatherController = {
                 <button onclick="WeatherController.forceDate('2025-01-15')">Winter</button>
                 <button onclick="WeatherController.forceDate('2025-04-20')">Easter</button>
                 <button onclick="WeatherController.forceDate('2025-06-15')">Ordinary</button>
+                <button onclick="WeatherController.forceDate('2026-01-01')">New Year's</button>
             </div>
         `;
 
