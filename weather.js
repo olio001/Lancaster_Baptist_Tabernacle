@@ -187,7 +187,7 @@ const WeatherController = {
         const toggle = document.createElement('button');
         toggle.id = 'atmos-toggle';
         toggle.innerHTML = '🛠️';
-        toggle.title = 'Atmosphere Controls';
+        toggle.title = 'Controls';
         toggle.style.cssText = `
             background: rgba(10, 25, 47, 0.85); 
             color: white; 
@@ -215,7 +215,7 @@ const WeatherController = {
         menu.style.display = 'none'; // Start collapsed
         menu.innerHTML = `
             <div style="font-weight: bold; margin-bottom: 10px; color: var(--color-gold); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; font-size: 0.9rem;">
-                Atmosphere Controls
+                Controls
             </div>
             
             <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 5px;">Simulated Date:</div>
