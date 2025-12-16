@@ -241,6 +241,7 @@ const WeatherController = {
         `;
 
         menu.style.cssText = `
+            display: none;
             background: rgba(10, 25, 47, 0.95);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255,255,255,0.1);
